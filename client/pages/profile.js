@@ -1,52 +1,58 @@
-import { useLayoutEffect, useState } from 'react'
+import React from 'react'
+import { withSSRContext } from 'aws-amplify'
 import { Auth } from 'aws-amplify'
-import '../configureAmplify'
+import './../configureAmplify'
 
-function Profile(props) {
-    let [user, setUser] = useState(false)
+const Profile = (props) => {
 
-    useLayoutEffect(() => {
-        checkUser()
-        async function checkUser() {
-            await Auth.currentAuthenticatedUser()
-                .then((res) => setUser(res))
-                .catch((err) => setUser(false))
-        }
-    }, [])
-
-    console.log(user)
-    console.log(props.token)
+    console.log("user: ", props.user)
 
     return (
         <div>
-            {user ?
-                <button
-                    onClick={() => { Auth.signOut(); }}
-                >
-                    Logout
-                </button>
+            {!props.authenticated ?
+                <div>
+                    <h1>Not Authenticated</h1>
+                    <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
+                </div>
                 :
-                <button
-                    onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}
-                >
-                    Sign in with Google
-                </button>
+                <div>
+                    <h1> Hello {props.user.username} from SSR route!! </h1>
+                    <button onClick={() => { Auth.signOut(); }}> Logout </button>
+                </div>
             }
         </div>
     )
+
 }
 
-export async function getServerSideProps(params) {
-    // Call an external API endpoint to get posts.
-    // You can use any data fetching library
+export async function getServerSideProps({ req }) {
 
-    const token = await params.req.cookies["cognito"];
+    const { Auth } = withSSRContext({ req })
 
-    return {
-        props: {
-            token: token ? token : null,
-        },
+    try {
+        const user = await Auth.currentAuthenticatedUser();
+        console.log("user: ", user)
+        return {
+            props: {
+                authenticated: true,
+                user: {
+                    atributes: user.attributes,
+                    authenticationFlowType: user.authenticationFlowType,
+                    pool: user.pool.userPoolId,
+                    accessTokenJWT: user.signInUserSession.accessToken.jwtToken,
+                    idTokenJWT: user.signInUserSession.idToken.jwtToken,
+                    username: user.username,
+                }
+            }
+        }
+    } catch (err) {
+        return {
+            props: {
+                authenticated: false
+            }
+        }
     }
+
 }
 
 export default Profile
