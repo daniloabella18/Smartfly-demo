@@ -44,7 +44,7 @@ client/amplify/backend/.temp
 client/build/
 client/dist/
 client/node_modules/
-client/aws-exports.js
+#client/aws-exports.js
 client/awsconfiguration.json
 client/amplifyconfiguration.json
 client/amplifyconfiguration.dart
