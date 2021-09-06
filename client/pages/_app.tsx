@@ -1,8 +1,10 @@
-import '../styles/globals.css'
-import Link from 'next/link'
 import type { AppProps } from 'next/app'
+import Link from 'next/link'
+
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <div>
       <nav className="py-4 px-12 flex border-b border-gray-300">
@@ -16,9 +18,14 @@ function MyApp({ Component, pageProps }: AppProps) {
             <p>Profile</p>
           </a>
         </Link>
-        <Link href="/apiServerless">
+        <Link href="/loginCSR">
           <a>
-            <p>apiServerless</p>
+            <p> loginCSR </p>
+          </a>
+        </Link>
+        <Link href="/loginSSR">
+          <a>
+            <p> loginSSR </p>
           </a>
         </Link>
       </nav>

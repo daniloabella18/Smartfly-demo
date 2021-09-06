@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "smartflydemof7fe9b6f_identitypool_f7fe9b6f",
+    "identityPoolName": "smartflydemo5b739b8b_identitypool_5b739b8b",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "smartff7fe9b6f",
-    "userPoolName": "smartflydemof7fe9b6f_userpool_f7fe9b6f",
+    "resourceNameTruncated": "smartf5b739b8b",
+    "userPoolName": "smartflydemo5b739b8b_userpool_5b739b8b",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "smartff7fe9b6f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "smartf5b739b8b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "f7fe9b6f",
-    "resourceName": "smartflydemof7fe9b6f",
+    "sharedId": "5b739b8b",
+    "resourceName": "smartflydemo5b739b8b",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -50,14 +50,14 @@
     },
     "useDefault": "defaultSocial",
     "hostedUI": true,
-    "hostedUIDomainName": "smartflydemodomain",
+    "hostedUIDomainName": "smartflydemo5b739b8b-5b739b8b",
     "authProvidersUserPool": [
         "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3001/\"],\"LogoutURLs\":[\"http://localhost:3001/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3001/\"],\"LogoutURLs\":[\"http://localhost:3001/\"]}"
+    "dependsOn": []
 }

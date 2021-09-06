@@ -1,6 +1,6 @@
 {
   "auth": {
-    "smartflydemof7fe9b6f": {
+    "smartflydemo5b739b8b": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

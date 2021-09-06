@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-smartflydemo-dev-11923-authRole",
-      "UnauthRoleArn": "arn:aws:iam::572184171715:role/amplify-smartflydemo-dev-11923-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::572184171715:role/amplify-smartflydemo-dev-11923-authRole",
+      "AuthRoleName": "amplify-smartflydemo-dev-131225-authRole",
+      "UnauthRoleArn": "arn:aws:iam::572184171715:role/amplify-smartflydemo-dev-131225-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::572184171715:role/amplify-smartflydemo-dev-131225-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-smartflydemo-dev-11923-deployment",
-      "UnauthRoleName": "amplify-smartflydemo-dev-11923-unauthRole",
-      "StackName": "amplify-smartflydemo-dev-11923",
-      "StackId": "arn:aws:cloudformation:us-west-2:572184171715:stack/amplify-smartflydemo-dev-11923/82e2f930-0c76-11ec-a519-06cec0598c81",
-      "AmplifyAppId": "dgjh73fozl2pg"
+      "DeploymentBucketName": "amplify-smartflydemo-dev-131225-deployment",
+      "UnauthRoleName": "amplify-smartflydemo-dev-131225-unauthRole",
+      "StackName": "amplify-smartflydemo-dev-131225",
+      "StackId": "arn:aws:cloudformation:us-west-2:572184171715:stack/amplify-smartflydemo-dev-131225/3bccb860-0f2d-11ec-882d-0601a27b30e9",
+      "AmplifyAppId": "d3kqhsfeoqv2sw"
     },
     "categories": {
       "auth": {
-        "smartflydemof7fe9b6f": {}
+        "smartflydemo5b739b8b": {}
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react'
-import { withSSRContext } from 'aws-amplify'
-import './../configureAmplify'
+import { Auth, withSSRContext } from 'aws-amplify'
+import '../configureAmplify'
 
 const Profile = (props) => {
 
@@ -11,10 +11,12 @@ const Profile = (props) => {
             {!props.authenticated ?
                 <div>
                     <h1>Not Authenticated</h1>
+                    <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
                 </div>
                 :
                 <div>
                     <h1> Hello {props.user.username} from SSR route!! </h1>
+                    <button onClick={() => { Auth.signOut(); }}> Logout </button>
                 </div>
             }
         </div>
@@ -22,9 +24,9 @@ const Profile = (props) => {
 
 }
 
-export async function getServerSideProps({ req }) {
+export const getServerSideProps = async ({ req }) => {
 
-    console.log("UUUUUYY")
+    console.log("UUUUURR")
 
     const Auth = await withSSRContext({ req }).Auth
 
