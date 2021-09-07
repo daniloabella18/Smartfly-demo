@@ -10,12 +10,12 @@ const Profile = (props) => {
         <div>
             {!props.authenticated ?
                 <div>
-                    <h1>Not Authenticated</h1>
+                    <h1> SSR Not Authenticated </h1>
                     <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
                 </div>
                 :
                 <div>
-                    <h1> Hello {props.user.username} from SSR route!! </h1>
+                    <h1> SSR Hello {props.user.username} from SSR route!! </h1>
                     <button onClick={() => { Auth.signOut(); }}> Logout </button>
                 </div>
             }

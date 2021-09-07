@@ -14,8 +14,17 @@ function Profile() {
     }, []);
     return (
         <div>
-            {user && <h1>Welcome, {user.username}</h1>}
-            <button onClick={() => { Auth.signOut(); }}> Logout </button>
+            {!user ?
+                <div>
+                    <h1> CSR Not Authenticated </h1>
+                    <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
+                </div>
+                :
+                <div>
+                    <h1> CSR Hello {user.username} from SSR route!! </h1>
+                    <button onClick={() => { Auth.signOut(); }}> Logout </button>
+                </div>
+            }
         </div>
     )
 }
