@@ -7,6 +7,8 @@ import { GetServerSideProps } from 'next'
 import { Auth, withSSRContext } from 'aws-amplify'
 import '../configureAmplify'
 
+import nookies from 'nookies'
+
 import styles from '../styles/Home.module.css'
 
 const Home = (props: JSON) => {
@@ -23,7 +25,7 @@ const Home = (props: JSON) => {
         setUser(resp)
       })
       .catch((err) => {
-        console.error("User: ", err)
+        console.log("User: ", err)
         setCarga(true)
       })
 
@@ -74,32 +76,71 @@ const Home = (props: JSON) => {
 
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  console.log("UUUUURR")
+  const cookies = nookies.get(context)
 
-  const Auth = await withSSRContext({ req }).Auth
-
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log("user: ", user)
+  if (cookies.accessTokenJWT) {
     return {
       props: {
+        withCookies: true,
         authenticated: true,
         user: {
-          atributes: user.attributes,
-          authenticationFlowType: user.authenticationFlowType,
-          pool: user.pool.userPoolId,
-          accessTokenJWT: user.signInUserSession.accessToken.jwtToken,
-          idTokenJWT: user.signInUserSession.idToken.jwtToken,
-          username: user.username,
+          accessTokenJWT: cookies.accessTokenJWT,
+          idTokenJWT: cookies.idTokenJWT,
+          username: cookies.username,
         }
       }
     }
-  } catch (err) {
-    return {
-      props: {
-        authenticated: false
+  } else {
+
+    const Auth = await withSSRContext(context).Auth
+
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+
+      const accessTokenJWT = await user.signInUserSession.accessToken.jwtToken
+      const idTokenJWT = await user.signInUserSession.idToken.jwtToken
+      const username = await user.username
+
+      console.log("userA: ", user)
+
+      nookies.set(context, 'accessTokenJWT', accessTokenJWT, {
+        maxAge: 86400,
+        httpOnly: true,
+        path: '/',
+      });
+
+      nookies.set(context, 'idTokenJWT', idTokenJWT, {
+        maxAge: 86400,
+        httpOnly: true,
+        path: '/',
+      });
+
+      nookies.set(context, 'username', username, {
+        maxAge: 86400,
+        httpOnly: true,
+        path: '/',
+      });
+
+      console.log("user: ", user)
+      return {
+        props: {
+          withCookies: false,
+          authenticated: true,
+          user: {
+            accessTokenJWT,
+            idTokenJWT,
+            username: username ? username : null,
+          }
+        }
+      }
+    } catch (err) {
+      return {
+        props: {
+          withCookies: false,
+          authenticated: false
+        }
       }
     }
   }

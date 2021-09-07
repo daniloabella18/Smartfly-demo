@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify'
 import '../configureAmplify'
 
+import { destroyCookie } from 'nookies'
+
 function Profile() {
     const [user, setUser] = useState(null);
     useEffect(() => {
@@ -12,6 +14,16 @@ function Profile() {
             })
             .catch(() => setUser(null))
     }, []);
+
+    const DestroyCookies = () => {
+
+        destroyCookie(null, 'accessTokenJWT');
+        destroyCookie(null, 'idTokenJWT');
+        destroyCookie(null, 'username');
+
+        Auth.signOut();
+    }
+
     return (
         <div>
             {!user ?
@@ -22,7 +34,7 @@ function Profile() {
                 :
                 <div>
                     <h1> CSR Hello {user.username} from SSR route!! </h1>
-                    <button onClick={() => { Auth.signOut(); }}> Logout </button>
+                    <button onClick={() => { DestroyCookies() }}> Logout </button>
                 </div>
             }
         </div>
