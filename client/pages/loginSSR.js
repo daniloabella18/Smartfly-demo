@@ -23,6 +23,7 @@ const Profile = (props) => {
                 <div>
                     <h1> SSR Not Authenticated </h1>
                     <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
+                    <button onClick={() => { Auth.federatedSignIn({ provider: "SignInWithApple" }) }}> Sign in with Apple </button>
                 </div>
                 :
                 <div>
@@ -64,19 +65,19 @@ export const getServerSideProps = async (context) => {
 
             nookies.set(context, 'accessTokenJWT', accessTokenJWT, {
                 maxAge: 86400,
-                httpOnly: true,
+                //httpOnly: true,
                 path: '/',
             });
 
             nookies.set(context, 'idTokenJWT', idTokenJWT, {
                 maxAge: 86400,
-                httpOnly: true,
+                //httpOnly: true,
                 path: '/',
             });
 
             nookies.set(context, 'username', username, {
                 maxAge: 86400,
-                httpOnly: true,
+                //httpOnly: true,
                 path: '/',
             });
 

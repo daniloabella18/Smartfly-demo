@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/profile.js", "configureAmplify.js", "pages/apiServelerss.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/profile.js", "configureAmplify.js", "pages/apiServelerss.js", "pages/register.js", "pages/login.js"],
   "exclude": ["node_modules"]
 }

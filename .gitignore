@@ -34,6 +34,7 @@ client/yarn-error.log*
 client/.vercel
 
 #amplify-do-not-edit-begin
+client/amplify
 client/amplify/\#current-cloud-backend
 client/amplify/.config/local-*
 client/amplify/logs

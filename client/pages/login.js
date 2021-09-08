@@ -1,22 +1,64 @@
-import React from 'react'
+import { useState, React } from 'react'
 import { withSSRContext } from 'aws-amplify'
-import './../configureAmplify'
+import { Auth } from 'aws-amplify'
+import '../configureAmplify'
 
-import nookies from 'nookies'
+import nookies, { destroyCookie } from 'nookies'
 
-const Profile = (props) => {
+const Login = (props) => {
+    // Logeo
+    const [username, setUsername] =  useState('')
+    const [password, setPassword] = useState('')
+    const [userInfo, setUserInfo] = useState(props.user ? props.user : null)
+
+    // Logeo
+    async function signIn() {
+        try {
+            const userSignIn = await Auth.signIn(username, password);
+            console.log("userSignIn: ", userSignIn)
+            setUserInfo(userSignIn)
+        } catch (error) {
+            console.log('error signing in', error);
+        }
+    }
+
+    const DestroyCookies = async () => {
+
+        destroyCookie(null, 'accessTokenJWT');
+        destroyCookie(null, 'idTokenJWT');
+        destroyCookie(null, 'username');
+
+        try {
+            await Auth.signOut();
+            setUserInfo(null);
+        }catch(err){
+            console.log("err: ", err)
+        }
+        
+    }
 
     console.log("props: ", props)
+    console.log("userInfo: ", userInfo)
 
     return (
         <div>
-            {!props.authenticated ?
+            {!userInfo ?
                 <div>
-                    <h1>  Not Authenticated</h1>
+                    <h2> Login </h2>
+
+                    <label htmlFor="usu_name"> Nombre </label><br />
+                    <input type="text" id="usu_name" name="usu_name" value={username} onChange={(event) => { setUsername(event.target.value) }} />
+                    <br />
+                    <label htmlFor="password"> Password </label><br />
+                    <input type="password" id="password" name="password" value={password} onChange={(event) => { setPassword(event.target.value) }} />
+                    <br />
+                    <button onClick={() => { signIn() }}> SignIn </button>
+
                 </div>
                 :
                 <div>
-                    <h1> Hello {props.user.username} from SSR route!! </h1>
+                    <h2> Hello {userInfo ? userInfo.username : userInfo.username }!! </h2>
+                    <button onClick={() => { DestroyCookies() }}> Logout </button>
                 </div>
             }
         </div>
@@ -93,4 +135,4 @@ export async function getServerSideProps(context) {
 
 }
 
-export default Profile
+export default Login

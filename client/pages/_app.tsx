@@ -10,12 +10,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       <nav className="py-4 px-12 flex border-b border-gray-300">
         <Link href="/">
           <a>
-            <p>Home</p>
+            <p> Home </p>
           </a>
         </Link>
         <Link href="/profile">
           <a>
-            <p>Profile</p>
+            <p> Profile </p>
           </a>
         </Link>
         <Link href="/loginCSR">
@@ -26,6 +26,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Link href="/loginSSR">
           <a>
             <p> loginSSR </p>
+          </a>
+        </Link>
+        <Link href="/register">
+          <a>
+            <p> register </p>
+          </a>
+        </Link>
+        <Link href="/login">
+          <a>
+            <p> login </p>
           </a>
         </Link>
       </nav>

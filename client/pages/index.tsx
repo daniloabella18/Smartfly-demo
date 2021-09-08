@@ -107,19 +107,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
       nookies.set(context, 'accessTokenJWT', accessTokenJWT, {
         maxAge: 86400,
-        httpOnly: true,
+        //httpOnly: true,
         path: '/',
       });
 
       nookies.set(context, 'idTokenJWT', idTokenJWT, {
         maxAge: 86400,
-        httpOnly: true,
+        //httpOnly: true,
         path: '/',
       });
 
       nookies.set(context, 'username', username, {
         maxAge: 86400,
-        httpOnly: true,
+        //httpOnly: true,
         path: '/',
       });
 
