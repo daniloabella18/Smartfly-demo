@@ -1,11 +1,17 @@
 import { useState, React } from 'react'
+
 import { withSSRContext } from 'aws-amplify'
 import { Auth } from 'aws-amplify'
 import '../configureAmplify'
 
 import nookies, { destroyCookie } from 'nookies'
 
+import { useRouter } from 'next/router'
+
 const Login = (props) => {
+    // Home
+    const router = useRouter()
+
     // Logeo
     const [username, setUsername] =  useState('')
     const [password, setPassword] = useState('')
@@ -30,11 +36,11 @@ const Login = (props) => {
 
         try {
             await Auth.signOut();
-            setUserInfo(null);
+            router.push('/')
         }catch(err){
             console.log("err: ", err)
         }
-        
+
     }
 
     console.log("props: ", props)

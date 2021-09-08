@@ -4,6 +4,8 @@ import '../configureAmplify'
 
 import { destroyCookie } from 'nookies'
 
+import { useRouter } from 'next/router'
+
 function Profile() {
     const [user, setUser] = useState(null);
     useEffect(() => {
@@ -30,6 +32,7 @@ function Profile() {
                 <div>
                     <h1> CSR Not Authenticated </h1>
                     <button onClick={() => { Auth.federatedSignIn({ provider: "Google" }) }}> Sign in with Google </button>
+                    <button onClick={() => { Auth.federatedSignIn({ provider: "SignInWithApple" }) }}> Sign in with Apple </button>
                 </div>
                 :
                 <div>
