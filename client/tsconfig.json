@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,6 +18,22 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/profile.js", "configureAmplify.js", "pages/apiServelerss.js", "pages/register.js", "pages/login.js", "pages/recuperar.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/profile.js",
+    "configureAmplify.js",
+    "pages/apiServelerss.js",
+    "pages/register.js",
+    "pages/login.js",
+    "pages/recuperar.js",
+    "pages/signOut.js",
+    "src/requiresToBeAuthenticated.js",
+    "src/checkIfItIsAuthenticated.js",
+    "src/requiresNotBeAuthenticated.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

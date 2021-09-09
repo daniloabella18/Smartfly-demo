@@ -18,14 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <p> Profile </p>
           </a>
         </Link>
-        <Link href="/loginCSR">
+        <Link href="/loginOAuth">
           <a>
-            <p> loginCSR </p>
-          </a>
-        </Link>
-        <Link href="/loginSSR">
-          <a>
-            <p> loginSSR </p>
+            <p> loginOAuth </p>
           </a>
         </Link>
         <Link href="/register">
@@ -41,6 +36,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Link href="/recuperar">
           <a>
             <p> recuperar contraseña </p>
+          </a>
+        </Link>
+        <Link href="/signOut">
+          <a>
+            <p> signOut </p>
           </a>
         </Link>
       </nav>

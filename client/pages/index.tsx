@@ -4,34 +4,55 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { GetServerSideProps } from 'next'
 
-import { Auth, withSSRContext } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 import '../configureAmplify'
 
-import nookies from 'nookies'
+import { setCookie } from 'nookies'
 
 import styles from '../styles/Home.module.css'
 
-const Home = (props: JSON) => {
+const Home = () => {
 
-  const [carga, setCarga] = useState<any>(false)
+  const [cargado, setCargado] = useState<any>(false)
   const [user, setUser] = useState<any>(null)
 
   useEffect(() => {
-    setCarga(false)
+    setCargado(false)
     Auth.currentAuthenticatedUser()
       .then(resp => {
         console.log("User: ", resp)
-        setCarga(true)
+        setCargado(true)
         setUser(resp)
+
+        const accessTokenJWT = resp.signInUserSession.accessToken.jwtToken
+        const idTokenJWT = resp.signInUserSession.idToken.jwtToken
+        const username = resp.username
+
+        setCookie(null, 'accessTokenJWT', accessTokenJWT, {
+          maxAge: 86400,
+          //httpOnly: true,
+          path: '/',
+        });
+
+        setCookie(null, 'idTokenJWT', idTokenJWT, {
+          maxAge: 86400,
+          //httpOnly: true,
+          path: '/',
+        });
+
+        setCookie(null, 'username', username, {
+          maxAge: 86400,
+          //httpOnly: true,
+          path: '/',
+        });
+
       })
       .catch((err) => {
         console.log("User: ", err)
-        setCarga(true)
+        setCargado(true)
       })
 
   }, []);
-
-  console.log("props: ", props)
 
   return (
     <div className={styles.container}>
@@ -49,7 +70,7 @@ const Home = (props: JSON) => {
 
         <div className={styles.description}>
           <main className={styles.main}>
-            {carga ?
+            {cargado ?
               <p>  Hola {user ? user.username : 'viajero'} !! </p>
               :
               <p> Cargando... </p>
@@ -78,70 +99,9 @@ const Home = (props: JSON) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  const cookies = nookies.get(context)
-
-  if (cookies.accessTokenJWT) {
-    return {
-      props: {
-        withCookies: true,
-        authenticated: true,
-        user: {
-          accessTokenJWT: cookies.accessTokenJWT,
-          idTokenJWT: cookies.idTokenJWT,
-          username: cookies.username,
-        }
-      }
-    }
-  } else {
-
-    const Auth = await withSSRContext(context).Auth
-
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-
-      const accessTokenJWT = await user.signInUserSession.accessToken.jwtToken
-      const idTokenJWT = await user.signInUserSession.idToken.jwtToken
-      const username = await user.username
-
-      console.log("userA: ", user)
-
-      nookies.set(context, 'accessTokenJWT', accessTokenJWT, {
-        maxAge: 86400,
-        //httpOnly: true,
-        path: '/',
-      });
-
-      nookies.set(context, 'idTokenJWT', idTokenJWT, {
-        maxAge: 86400,
-        //httpOnly: true,
-        path: '/',
-      });
-
-      nookies.set(context, 'username', username, {
-        maxAge: 86400,
-        //httpOnly: true,
-        path: '/',
-      });
-
-      console.log("user: ", user)
-      return {
-        props: {
-          withCookies: false,
-          authenticated: true,
-          user: {
-            accessTokenJWT,
-            idTokenJWT,
-            username: username ? username : null,
-          }
-        }
-      }
-    } catch (err) {
-      return {
-        props: {
-          withCookies: false,
-          authenticated: false
-        }
-      }
+  return {
+    props: {
+      number: 1,
     }
   }
 
