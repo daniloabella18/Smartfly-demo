@@ -38,6 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             <p> login </p>
           </a>
         </Link>
+        <Link href="/recuperar">
+          <a>
+            <p> recuperar contraseña </p>
+          </a>
+        </Link>
       </nav>
       <Component {...pageProps} />
     </div>
