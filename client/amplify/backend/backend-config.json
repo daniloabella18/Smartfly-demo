@@ -38,5 +38,11 @@
         }
       ]
     }
+  },
+  "storage": {
+    "imagebuckets3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

@@ -1,4 +1,6 @@
 {
+    "identityPoolName": "smartflydemo5b739b8b_identitypool_51730016",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "smartf5b739b8b",
     "userPoolName": "smartflydemo5b739b8b_userpool_5b739b8b",
     "autoVerifiedAttributes": [
@@ -33,7 +35,7 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "5b739b8b",
     "resourceName": "smartflydemo5b739b8b",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",

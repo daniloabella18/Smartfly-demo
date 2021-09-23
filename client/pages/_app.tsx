@@ -1,10 +1,9 @@
-import type { AppProps } from 'next/app'
-import Link from 'next/link'
+import type { AppProps } from "next/app";
+import Link from "next/link";
 
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <div>
       <nav className="py-4 px-12 flex border-b border-gray-300">
@@ -43,10 +42,15 @@ function MyApp({ Component, pageProps }: AppProps) {
             <p> signOut </p>
           </a>
         </Link>
+        <Link href="/storage">
+          <a>
+            <p> storage </p>
+          </a>
+        </Link>
       </nav>
       <Component {...pageProps} />
     </div>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

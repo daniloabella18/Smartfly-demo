@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "smartflydemo5b739b8b": {}
+        "smartflydemo5b739b8b": {},
+        "userPoolGroups": {}
       }
     }
   }
