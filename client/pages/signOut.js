@@ -6,7 +6,7 @@ import { destroyCookie } from 'nookies'
 
 import { useRouter } from 'next/router'
 
-import requiresToBeAuthenticated from '../src/requiresToBeAuthenticated'
+import { requiresToBeAuthenticated } from '../src'
 
 const SignOut = ({ user }) => {
     // Home

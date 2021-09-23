@@ -1,10 +1,17 @@
+service: serverless-aws-smartflydemo
 
-service: aws-node-auth0-cognito-custom-authorizers-api
+app: serverless-smartflydemo
 
 provider:
   name: aws
   runtime: nodejs12.x
+  region: us-west-2
   lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ses:*
+      Resource: "*"
 
 plugins:
   - serverless-offline
@@ -29,10 +36,18 @@ functions:
           authorizer: auth
           cors:
             origins:
-              - '*'
+              - "*"
             headers:
               - Content-Type
               - X-Amz-Date
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  sendCustomEmail:
+    handler: emails.sendCustomEmail
+    events:
+      - http:
+          path: api/send-email
+          method: POST
+          integration: lambda
+          cors: true

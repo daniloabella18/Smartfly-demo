@@ -4,6 +4,7 @@ const jwk = require('jsonwebtoken');
 const jwkToPem = require('jwk-to-pem');
 const request = require('request');
 
+// For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>
 const iss = 'https://cognito-idp.us-west-2.amazonaws.com/us-west-2_L6yh2eV65';
 
 // Generate policy to allow this user on this API:

@@ -60,3 +60,4 @@ client/.secret-*
 
 # dependencies
 server/node_modules
+server/.serverless

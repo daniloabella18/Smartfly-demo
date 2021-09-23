@@ -11,6 +11,7 @@ import { setCookie } from 'nookies'
 
 import styles from '../styles/Home.module.css'
 
+
 const Home = () => {
 
   const [cargado, setCargado] = useState<any>(false)
